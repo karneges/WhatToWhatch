@@ -7,26 +7,26 @@ import { timer } from "../../utils/utils";
 const MovieCard = ({ image, FilmName, id, video }) => {
   const [isVideo, setIsVideo] = useState(false);
   const [playVideo, setPlayVideo] = useState(false);
-console.log(isVideo);
 
-
-  useEffect (() => {
-    let timerId =''
-    if(isVideo) {
-      timerId = timer(setPlayVideo)
+  useEffect(() => {
+    let timerId = "";
+    if (isVideo) {
+      timerId = timer(setPlayVideo);
     }
     return () => {
-      setPlayVideo(false)
-      clearInterval(timerId)}
-  },[isVideo])
+      setPlayVideo(false);
+      clearInterval(timerId);
+    };
+  }, [isVideo]);
 
-  const VideoState = ({video}) => {
+  const VideoState = ({ video }) => {
     return (
-      <video autoPlay={true} width={'100%'} controls={false}>
-        <source
-          src={video}
-          type="video/mp4"
-        />
+      <video
+        className="small-movie-card__image"
+        autoPlay={true}
+        controls={false}
+      >
+        <source src={video} type="video/mp4" />
       </video>
     );
   };

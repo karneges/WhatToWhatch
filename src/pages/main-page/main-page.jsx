@@ -30,7 +30,9 @@ const MainPage = ({ match }) => {
       <section className="movie-card">
         {isLoading && <Loading />}
         {!isLoading && dataFilms !== null && (
-          <BackgroundImage image={dataFilms[match.params.id - 1].background_image} />
+          <BackgroundImage
+            image={dataFilms[match.params.id - 1].background_image}
+          />
         )}
 
         <h1 className="visually-hidden">WTW</h1>
