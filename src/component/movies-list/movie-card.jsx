@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { timer } from "../../utils/utils";
 
-const MovieCard = ({ image, FilmName, id, video }) => {
+const MovieCard = ({ image, FilmName, id, video,genre }) => {
   const [isVideo, setIsVideo] = useState(false);
   const [playVideo, setPlayVideo] = useState(false);
 
@@ -49,7 +49,7 @@ const MovieCard = ({ image, FilmName, id, video }) => {
               className="small-movie-card__link"
               href="movie-page.html"
             >
-              {FilmName}
+              {FilmName}   {genre}
             </Link>
           </h3>
         </Fragment>

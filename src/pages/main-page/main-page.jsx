@@ -1,24 +1,24 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect } from "react";
 
-import { useEffect } from "react";
-import useFetch from "../../services/api-service";
 import Loading from "../../component/loading/loading";
 import MovieList from "../../component/movies-list/movies-list";
 import MovieBigCard from "../../component/movie-big-card/movie-big-card";
 import BackgroundImage from "../../component/background-image/background-image";
+import { useContext } from "react";
+import { FilmContext } from "../../contexts/film-context-service";
+import { fetchingBooks } from "../../action/action-creater";
+import { useState } from "react";
+import FilterTabs from "../../component/tabs-filter/tabs-filter";
 
 const MainPage = ({ match }) => {
-  const [dataFilms, setDataFilms] = useState(null);
-  const [{ isLoading, response, error }, doFetch] = useFetch();
+  const [store, dispatch] = useContext(FilmContext);
+  const { films, loading, error } = store;
+  const [filter, setFilter] = useState(`allGeners`);
 
   useEffect(() => {
-    doFetch();
-  }, [doFetch]);
-
-  useEffect(() => {
-    setDataFilms(response);
-  }, [response]);
+    fetchingBooks(dispatch);
+  }, [dispatch]);
 
   return (
     <Fragment>
@@ -28,10 +28,10 @@ const MainPage = ({ match }) => {
       </div>
 
       <section className="movie-card">
-        {isLoading && <Loading />}
-        {!isLoading && dataFilms !== null && (
+        {loading && <Loading />}
+        {!loading && films !== null && (
           <BackgroundImage
-            image={dataFilms[match.params.id - 1].background_image}
+            image={films[match.params.id - 1].background_image}
           />
         )}
 
@@ -57,71 +57,18 @@ const MainPage = ({ match }) => {
             </div>
           </div>
         </header>
-        {isLoading && <Loading />}
-        {!isLoading && dataFilms !== null && (
-          <MovieBigCard dataFilms={dataFilms} />
-        )}
+        {loading && <Loading />}
+        {!loading && films !== null && <MovieBigCard dataFilms={films} />}
       </section>
 
       <div className="page-content">
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-          <ul className="catalog__genres-list">
-            <li className="catalog__genres-item catalog__genres-item--active">
-              <a href="#" className="catalog__genres-link">
-                All genres
-              </a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">
-                Comedies
-              </a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">
-                Crime
-              </a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">
-                Documentary
-              </a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">
-                Dramas
-              </a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">
-                Horror
-              </a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">
-                Kids & Family
-              </a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">
-                Romance
-              </a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">
-                Sci-Fi
-              </a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">
-                Thrillers
-              </a>
-            </li>
-          </ul>
-          {isLoading && <Loading />}
-          {!isLoading && dataFilms !== null && (
-            <MovieList dataFilms={dataFilms} />
+          <FilterTabs setFilter={setFilter} />
+          {loading && <Loading />}
+          {!loading && films !== null && (
+            <MovieList dataFilms={films} filter={filter} />
           )}
 
           <div className="catalog__more">
