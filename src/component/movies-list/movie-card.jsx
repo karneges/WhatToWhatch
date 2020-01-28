@@ -26,7 +26,7 @@ const MovieCard = ({ image, FilmName, id, video,genre }) => {
         autoPlay={true}
         controls={false}
       >
-        <source src={video} type="video/mp4" />
+        <source src={video}  type="video/mp4" />
       </video>
     );
   };

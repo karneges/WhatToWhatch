@@ -3,11 +3,11 @@ import { Link } from "react-router-dom";
 
 const FilterTabs = ({setFilter}) => {
   const handler = value => {
-    setFilter(value[0])
+    setFilter(...value)
   };
 
   const buttons = [
-    { "All genres": ["allGenre"] },
+    { "All genres": [""] },
     { Comedies: ["Comedy"] },
     { Crime: ["Crime"] },
     { Dramas: ["Drama"] },
@@ -23,9 +23,9 @@ const FilterTabs = ({setFilter}) => {
         key={id}
         className="catalog__genres-item catalog__genres-item--active"
       >
-        <a href="#" className="catalog__genres-link">
+        <Link to='' className="catalog__genres-link">
           {Object.keys(item)}
-        </a>
+        </Link>
       </li>
     );
   });

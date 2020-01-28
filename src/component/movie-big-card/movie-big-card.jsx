@@ -1,46 +1,48 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { withRouter } from "react-router-dom";
-
-const MovieBigCard = ({ match, dataFilms }) => {
-  const currentFilm = dataFilms[match.params.id - 1];
+import classNames from "classnames";
+import FilmBrief from "./film-brief";
+import BackgroundImage from "../background-image/background-image";
+import { addFilmOnMyList,deleteFilmOnMyList } from "../../action/action-creater";
+const MovieBigCard = ({ match, dataFilms, dispatch, myFilmList }) => {
+  const currentFilm = dataFilms[match.params.id - 1] || dataFilms[0];
   const {
+    id,
     name: title,
     genre,
     released: year,
-    poster_image: posterImage
+    poster_image: posterImage,
+    background_image: backgroundimage
   } = currentFilm;
 
+  const isAdd = myFilmList.find(item => item.id === id);
+
+  const iconClasses = classNames({
+    "fa fa-lg fa-plus": !isAdd,
+    "fa fa-lg fa-check": isAdd
+  });
+  const addFilmHandler = () => {
+    if(!isAdd){
+      dispatch(addFilmOnMyList(currentFilm));
+    }
+    if(isAdd){
+      dispatch(deleteFilmOnMyList(currentFilm))
+    }
+   
+  };
+
   return (
-    <div className="movie-card__wrap">
-      <div className="movie-card__info">
-        <div className="movie-card__poster">
-          <img src={posterImage} alt={title} width="218" height="327" />
-        </div>
-
-        <div className="movie-card__desc">
-          <h2 className="movie-card__title">{title}</h2>
-          <p className="movie-card__meta">
-            <span className="movie-card__genre">{genre}</span>
-            <span className="movie-card__year">{year}</span>
-          </p>
-
-          <div className="movie-card__buttons">
-            <button className="btn btn--play movie-card__button" type="button">
-              <svg viewBox="0 0 19 19" width="19" height="19">
-                <use href="#play-s"></use>
-              </svg>
-              <span>Play</span>
-            </button>
-            <button className="btn btn--list movie-card__button" type="button">
-              <svg viewBox="0 0 19 20" width="19" height="20">
-                <use href="#add"></use>
-              </svg>
-              <span>My list</span>
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
+    <Fragment>
+      <BackgroundImage image={backgroundimage} />
+      <FilmBrief
+        addFilmHandler={addFilmHandler}
+        posterImage={posterImage}
+        genre={genre}
+        year={year}
+        title={title}
+        iconClasses={iconClasses}
+      />
+    </Fragment>
   );
 };
 export default withRouter(MovieBigCard);

@@ -8,9 +8,9 @@ import MyList from './pages/my-list/my-list';
 const Routes = () => {
   return (
     <Switch>
-      <Route path="/:id?" exact component={MainPage}/>
-      <Route path="/film/:id" component={SinglePageFilm}/>
-      <Route path="/user" component={MyList}/>
+      <Route path="/film/:id" exact  component={SinglePageFilm}/>
+      <Route path="/mylist" exact  component={MyList}/>
+      <Route path="/:id?" exact  component={MainPage}/>
     </Switch>
   )
 }

@@ -10,7 +10,8 @@ export const FilmContext = createContext()
 const initialState = {
   loading:true,
   error:false,
-  films:[]
+  films:[],
+  myFilmList:[]
 }
 
 export const FilmContextProvider = ({children}) => {

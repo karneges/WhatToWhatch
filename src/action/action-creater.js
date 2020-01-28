@@ -18,6 +18,18 @@ const fetchFilmsFailure = (error) => {
     payload: error
   }
 }
+const addFilmOnMyList = (film) => {
+  return {
+    type: 'ADD_FILM_ON_MY_LIST',
+    payload: film
+  }
+}
+const deleteFilmOnMyList = (film) => {
+  return {
+    type: 'DELETE_FILM_ON_MY_LIST',
+    payload: film
+  }
+}
 
 const fetchingBooks = (dispatch) => {
   dispatch(fetchFilmsRequest)
@@ -27,5 +39,10 @@ const fetchingBooks = (dispatch) => {
 }
 
 export {
-  fetchingBooks
+  fetchingBooks,
+  addFilmOnMyList,
+  deleteFilmOnMyList
 }
+
+
+

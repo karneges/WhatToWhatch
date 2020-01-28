@@ -1,12 +1,12 @@
+/* eslint-disable eqeqeq */
 import React from "react";
 import MovieCard from "./movie-card";
-import { withRouter } from "react-router-dom";
 
-const MovieList = ({ dataFilms, filter=["allGenre"] }) => {
-  console.log(filter);
+
+const MovieList = ({ dataFilms, filter=[] }) => {
   
   const movieList = dataFilms.map(film => {
-    if (filter.includes(film.genre)||filter[0]==="allGenre") {
+    if (filter.includes(film.genre) || filter==false) {
       return (
         <MovieCard
           id={film.id}
@@ -24,4 +24,4 @@ const MovieList = ({ dataFilms, filter=["allGenre"] }) => {
   return <div className="catalog__movies-list">{movieList}</div>;
 };
 
-export default withRouter(MovieList);
+export default MovieList;
