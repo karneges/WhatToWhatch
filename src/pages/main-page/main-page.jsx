@@ -2,13 +2,11 @@
 import React, { Fragment, useEffect } from "react";
 
 import Loading from "../../component/loading/loading";
-import MovieList from "../../component/movies-list/movies-list";
 import MovieBigCard from "../../component/movie-big-card/movie-big-card";
-import BackgroundImage from "../../component/background-image/background-image";
 import { useContext } from "react";
 import { FilmContext } from "../../contexts/film-context-service";
 import { fetchingBooks } from "../../action/action-creater";
-
+import './style.css'
 import Header from "../../component/header/header";
 import Footer from "../../component/footer/footer";
 import MainCatalog from "../../component/main-catalog/main-catalog";
@@ -17,7 +15,7 @@ const MainPage = () => {
   const [globalState, dispatch] = useContext(FilmContext);
   const { films, loading, error,myFilmList } = globalState;
   console.log(myFilmList);
-  
+   
   useEffect(() => {
 
     fetchingBooks(dispatch);
