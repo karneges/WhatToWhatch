@@ -11,7 +11,7 @@ import Header from "../../component/header/header";
 import Footer from "../../component/footer/footer";
 import MainCatalog from "../../component/main-catalog/main-catalog";
 
-const MainPage = () => {
+const MainPage = ({children}) => {
   const [globalState, dispatch] = useContext(FilmContext);
   const { films, loading, error,myFilmList } = globalState;
   console.log(myFilmList);
@@ -32,9 +32,10 @@ const MainPage = () => {
         dispatch={dispatch} />}
       </section>
       <div className="page-content">
-        <MainCatalog loading={loading} films={films} />
+        {children({loading,films})}
         <Footer />
       </div>
+      
     </Fragment>
   );
 };

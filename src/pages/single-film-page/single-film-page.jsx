@@ -2,12 +2,14 @@ import React, { Fragment } from "react";
 import Header from "../../component/header/header";
 import Footer from "../../component/footer/footer";
 import Loading from "../../component/loading/loading";
-
+import './single-film-page.css'
 import { useContext } from "react";
 import { FilmContext } from "../../contexts/film-context-service";
 import { useEffect } from "react";
 import { fetchingBooks } from "../../action/action-creater";
 import MovieBigCard from "../../component/movie-big-card/movie-big-card";
+
+
 const SinglePageFilm = () => {
 
   const [globalState, dispatch] = useContext(FilmContext);
@@ -23,7 +25,7 @@ const SinglePageFilm = () => {
 
 
       <section class="movie-card movie-card--full">
-        <div class="movie-card__hero">
+        {/* <div class="movie-card__hero">
           <div class="movie-card__bg">
             <img
               src="img/bg-the-grand-budapest-hotel.jpg"
@@ -42,18 +44,11 @@ const SinglePageFilm = () => {
           <div class="movie-card__wrap">
 
           </div>
-        </div>
+        </div> */}
 
         <div class="movie-card__wrap movie-card__translate-top">
           <div class="movie-card__info">
-            <div class="movie-card__poster movie-card__poster--big">
-              <img
-                src="img/the-grand-budapest-hotel-poster.jpg"
-                alt="The Grand Budapest Hotel poster"
-                width="218"
-                height="327"
-              />
-            </div>
+
 
             <div class="movie-card__desc">
               <nav class="movie-nav movie-card__nav">

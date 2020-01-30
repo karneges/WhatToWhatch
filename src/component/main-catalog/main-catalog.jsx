@@ -9,7 +9,7 @@ const MainCatalog = ({ films, loading }) => {
     <section className="catalog">
       <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-      <FilterTabs setFilter={setFilter} />
+      <FilterTabs setFilter={setFilter} filter={filter} />
       {loading && <Loading />}
       {!loading && films !== null && (
         <MovieList dataFilms={films} filter={filter} />

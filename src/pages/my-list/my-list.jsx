@@ -7,7 +7,7 @@ import { FilmContext } from '../../contexts/film-context-service';
 import { fetchingBooks } from '../../action/action-creater';
 import { useEffect } from 'react';
 
-const MyList = () => {
+const MyList = ({state}) => {
   const [globalState, dispatch] = useContext(FilmContext);
   const { myFilmList } = globalState;
 

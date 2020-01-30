@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { withRouter } from "react-router-dom";
+import { withRouter, useParams, useLocation } from "react-router-dom";
 import classNames from "classnames";
 import FilmBrief from "./film-brief";
 import BackgroundImage from "../background-image/background-image";
@@ -8,7 +8,12 @@ import {
   deleteFilmOnMyList
 } from "../../action/action-creater";
 const MovieBigCard = ({ match, history, dataFilms, dispatch, myFilmList }) => {
-  const currentFilm = dataFilms[match.params.id - 1] || dataFilms[0];
+  const getIdentificator = () => {
+    return Object.values(match.params).filter(item => item > 0)[0];
+  };
+  const currentFilm = dataFilms[getIdentificator() - 1] || dataFilms[0];
+
+
   const {
     id,
     name: title,
@@ -17,7 +22,6 @@ const MovieBigCard = ({ match, history, dataFilms, dispatch, myFilmList }) => {
     poster_image: posterImage,
     background_image: backgroundimage
   } = currentFilm;
-  console.log(backgroundimage);
 
   const isAdd = myFilmList.find(item => item.id === id);
 
@@ -33,24 +37,22 @@ const MovieBigCard = ({ match, history, dataFilms, dispatch, myFilmList }) => {
       dispatch(deleteFilmOnMyList(currentFilm));
     }
   };
-
-  const getUrlFromChangeInfo = () => {
-    if(!match.path.includes('/film')){
-      return `/film/${match.params.id}`
-    }
-    return `/${match.params.id}`
-  }
-
-
-
-  const showMoreHandler = () => history.push(getUrlFromChangeInfo())
-  console.log(match);
   
+  const getUrlFromChangeInfo = () => {
+    if (!match.url.includes("film")) {
+      return `/film/${(getIdentificator() || 1)}`;
+    }
+    return `/${getIdentificator()}`;
+  };
+
+  const showMoreHandler = () => history.push(getUrlFromChangeInfo());
+
+
   return (
     <Fragment>
       <BackgroundImage image={backgroundimage} />
       <FilmBrief
-      showMoreHandler={showMoreHandler}
+        showMoreHandler={showMoreHandler}
         history={history}
         addFilmHandler={addFilmHandler}
         posterImage={posterImage}

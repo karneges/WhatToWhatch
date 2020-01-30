@@ -1,10 +1,18 @@
 import React from "react";
-import { Link } from "react-router-dom";
-
-const FilterTabs = ({setFilter}) => {
+import { Link, useRouteMatch } from "react-router-dom";
+import classNames from "classnames";
+const FilterTabs = ({filter,setFilter}) => {
   const handler = value => {
     setFilter(...value)
   };
+  // console.log(filter);
+
+  // const iconClasses = classNames({
+  //   "catalog__genres-item": Object.keys,
+  //   "catalog__genres-item catalog__genres-item--active": isAdd
+  // });
+  
+  const {url} = useRouteMatch()
 
   const buttons = [
     { "All genres": [""] },
@@ -23,7 +31,7 @@ const FilterTabs = ({setFilter}) => {
         key={id}
         className="catalog__genres-item catalog__genres-item--active"
       >
-        <Link to='' className="catalog__genres-link">
+        <Link to={url} className="catalog__genres-link">
           {Object.keys(item)}
         </Link>
       </li>

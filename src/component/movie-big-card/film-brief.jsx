@@ -2,7 +2,7 @@ import React from "react";
 import ActionButton from "../buttons/action-button";
 import { useState } from "react";
 import { useEffect } from "react";
-import { useTransition, animated, config } from "react-spring";
+
 
 const FilmBrief = ({
   posterImage,
@@ -29,6 +29,10 @@ const FilmBrief = ({
     if (history.location.pathname.includes("/film")) {
       setState(true);
     }
+    else{
+      setState(false)
+    }
+    
   }, [history.location.pathname]);
 
 
@@ -56,10 +60,13 @@ const FilmBrief = ({
               title={"My list"}
               clickHandler={addFilmHandler}
             />
+            <ActionButton iconClass={iconClasses}
+            title={"Show More"}
+            clickHandler={showMoreHandler}/>
           </div>
         </div>
       </div>
-      <button onClick={showMoreHandler}>btn</button>
+      {/* <button onClick={showMoreHandler}>btn</button> */}
     </div>
   );
 };
