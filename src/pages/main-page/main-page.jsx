@@ -9,17 +9,13 @@ import { fetchingBooks } from "../../action/action-creater";
 import './style.css'
 import Header from "../../component/header/header";
 import Footer from "../../component/footer/footer";
-import MainCatalog from "../../component/main-catalog/main-catalog";
+import { useCurrentFilm } from "../../hooks/useCurrentFilm";
 
 const MainPage = ({children}) => {
   const [globalState, dispatch] = useContext(FilmContext);
   const { films, loading, error,myFilmList } = globalState;
-  console.log(myFilmList);
-   
-  useEffect(() => {
+   const currentFilm = useCurrentFilm()
 
-    fetchingBooks(dispatch);
-  }, [dispatch]);
 
   return (
     <Fragment>
@@ -28,7 +24,7 @@ const MainPage = ({children}) => {
         {loading && <Loading />}
         {!loading && films !== null && <MovieBigCard 
         myFilmList={myFilmList}
-        dataFilms={films}
+        currentFilm={currentFilm}
         dispatch={dispatch} />}
       </section>
       <div className="page-content">

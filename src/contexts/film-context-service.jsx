@@ -2,6 +2,8 @@ import React from 'react';
 import { createContext } from 'react';
 import { useReducer } from 'react';
 import reducer from '../reducers/reducer';
+import { useEffect } from 'react';
+import { fetchingBooks } from '../action/action-creater';
 
 
 
@@ -16,6 +18,10 @@ const initialState = {
 
 export const FilmContextProvider = ({children}) => {
   const store = useReducer(reducer,initialState)
+  const[,dispatch] = store
+  useEffect(() => {
+    fetchingBooks(dispatch);
+  }, [dispatch]);
   return (
     <FilmContext.Provider value={store}>
       {children}

@@ -7,12 +7,7 @@ import {
   addFilmOnMyList,
   deleteFilmOnMyList
 } from "../../action/action-creater";
-const MovieBigCard = ({ match, history, dataFilms, dispatch, myFilmList }) => {
-  const getIdentificator = () => {
-    return Object.values(match.params).filter(item => item > 0)[0];
-  };
-  const currentFilm = dataFilms[getIdentificator() - 1] || dataFilms[0];
-
+const MovieBigCard = ({ match, history, currentFilm, dispatch, myFilmList }) => {
 
   const {
     id,
@@ -37,16 +32,15 @@ const MovieBigCard = ({ match, history, dataFilms, dispatch, myFilmList }) => {
       dispatch(deleteFilmOnMyList(currentFilm));
     }
   };
-  
+
   const getUrlFromChangeInfo = () => {
     if (!match.url.includes("film")) {
-      return `/film/${(getIdentificator() || 1)}`;
+      return `/film/${currentFilm.id || 1}`;
     }
-    return `/${getIdentificator()}`;
+    return `/${currentFilm.id}`;
   };
 
   const showMoreHandler = () => history.push(getUrlFromChangeInfo());
-
 
   return (
     <Fragment>

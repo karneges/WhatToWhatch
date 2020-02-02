@@ -2,11 +2,14 @@
 import React from "react";
 import MovieCard from "./movie-card";
 
-
-const MovieList = ({ dataFilms, filter=[] }) => {
-  
+const MovieList = ({ dataFilms, filter = [], countFilms = Infinity }) => {
+  let currentId = 1;
   const movieList = dataFilms.map(film => {
-    if (filter.includes(film.genre) || filter==false) {
+    if (
+      (filter.includes(film.genre) || filter == false) &&
+      currentId <= countFilms
+    ) {
+      ++currentId;
       return (
         <MovieCard
           id={film.id}

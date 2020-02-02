@@ -1,35 +1,28 @@
 import React from "react";
 import { Link, useRouteMatch } from "react-router-dom";
-import classNames from "classnames";
-const FilterTabs = ({filter,setFilter}) => {
+const FilterTabs = ({filter,setFilter,buttons=[],className}) => {
   const handler = value => {
     setFilter(...value)
   };
-  // console.log(filter);
 
-  // const iconClasses = classNames({
-  //   "catalog__genres-item": Object.keys,
-  //   "catalog__genres-item catalog__genres-item--active": isAdd
-  // });
-  
+const getActiveClass = (item) => {  
+  // eslint-disable-next-line eqeqeq
+  if (Object.values(item).toString() == [...filter]){
+   return "catalog__genres-item catalog__genres-item--active" 
+  }
+  return "catalog__genres-item"
+}
+
+
   const {url} = useRouteMatch()
 
-  const buttons = [
-    { "All genres": [""] },
-    { Comedies: ["Comedy"] },
-    { Crime: ["Crime"] },
-    { Dramas: ["Drama"] },
-    { Action: ["Action"] },
-    { "Kids & Family": ["Fantasy", "Adventure"] },
-    { Thrillers: ["Thriller"] }
-  ];
-
   const FilterButtons = buttons.map((item, id) => {
+
     return (
       <li
       onClick={() => handler(Object.values(item))}
         key={id}
-        className="catalog__genres-item catalog__genres-item--active"
+        className={getActiveClass(item)}
       >
         <Link to={url} className="catalog__genres-link">
           {Object.keys(item)}
@@ -38,7 +31,7 @@ const FilterTabs = ({filter,setFilter}) => {
     );
   });
 
-  return <ul className="catalog__genres-list">{FilterButtons}</ul>;
+  return <ul className={className}>{FilterButtons}</ul>;
 };
 
 export default FilterTabs;
