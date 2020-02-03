@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { withRouter, useParams, useLocation } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import classNames from "classnames";
 import FilmBrief from "./film-brief";
 import BackgroundImage from "../background-image/background-image";
@@ -7,16 +7,26 @@ import {
   addFilmOnMyList,
   deleteFilmOnMyList
 } from "../../action/action-creater";
-const MovieBigCard = ({ match, history, currentFilm, dispatch, myFilmList }) => {
-
+import VideoPlayer from "../video-player/video-player";
+import { getUrlFromChangeInfo } from "../../utils/utils";
+import { useState } from "react";
+const MovieBigCard = ({
+  match,
+  history,
+  currentFilm,
+  dispatch,
+  myFilmList
+}) => {
   const {
     id,
     name: title,
     genre,
     released: year,
     poster_image: posterImage,
-    background_image: backgroundimage
+    background_image: backgroundimage,
+    video_link: video
   } = currentFilm;
+  const [isVideo, setIsVideo] = useState(false);
 
   const isAdd = myFilmList.find(item => item.id === id);
 
@@ -33,19 +43,25 @@ const MovieBigCard = ({ match, history, currentFilm, dispatch, myFilmList }) => 
     }
   };
 
-  const getUrlFromChangeInfo = () => {
-    if (!match.url.includes("film")) {
-      return `/film/${currentFilm.id || 1}`;
-    }
-    return `/${currentFilm.id}`;
-  };
+  const showMoreHandler = () =>
+    history.push(getUrlFromChangeInfo(currentFilm, match));
 
-  const showMoreHandler = () => history.push(getUrlFromChangeInfo());
+  const togleVideoHandler = () => {
+    setIsVideo(s => !s);
+  };
 
   return (
     <Fragment>
+      {isVideo && (
+        <VideoPlayer
+          video={video}
+          text={`text`}
+          onCloseHandler={togleVideoHandler}
+        />
+      )}
       <BackgroundImage image={backgroundimage} />
       <FilmBrief
+        showVideoHandler={togleVideoHandler}
         showMoreHandler={showMoreHandler}
         history={history}
         addFilmHandler={addFilmHandler}

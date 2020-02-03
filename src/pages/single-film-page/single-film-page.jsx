@@ -20,7 +20,6 @@ const SinglePageFilm = () => {
     { Reviews: ["reviewsFilm"] }
   ];
 
-
   const [filterState, setFilterState] = useState(["overviewFilm"]);
 
   return (

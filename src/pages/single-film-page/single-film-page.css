@@ -1,7 +1,7 @@
 .movie-card {
   min-height: 250px;
   position: relative;
-  z-index: 1;
+  z-index: 2;
   color: #eee5b5;
 
   background: #e1b0b2;
@@ -18,8 +18,8 @@
 
 .movie-card__nav {
   position: absolute;
-  left: 500px;
-  z-index: 5;
+  left: 35%;
+  z-index: 2;
   height: 0px;
   display: -webkit-box;
   display: -ms-flexbox;

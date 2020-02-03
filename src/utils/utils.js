@@ -12,3 +12,11 @@ export const getCurrentFilm = (match,films) => {
   };
   return films[getIdentificator() - 1] || films[0];
 }
+
+
+export const getUrlFromChangeInfo = (currentFilm,match) => {
+  if (!match.url.includes("film")) {
+    return `/film/${currentFilm.id || 1}`;
+  }
+  return `/${currentFilm.id}`;
+};

@@ -12,7 +12,8 @@ const FilmBrief = ({
   iconClasses,
   addFilmHandler,
   history,
-  showMoreHandler
+  showMoreHandler,
+  showVideoHandler
 }) => {
 
 
@@ -52,6 +53,7 @@ const FilmBrief = ({
 
           <div className="movie-card__buttons">
             <ActionButton
+            clickHandler={showVideoHandler}
               iconClass={"fa fa-lg fa-play-circle-o"}
               title={"Play"}
             />

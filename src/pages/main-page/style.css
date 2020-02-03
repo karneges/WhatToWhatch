@@ -635,7 +635,7 @@ main {
 .movie-card {
   height: 552px;
   position: relative;
-  z-index: 1;
+  z-index: 2;
   color: #EEE5B5;
   padding-bottom: 78px;
   background: #E1B0B2; }
@@ -1360,7 +1360,7 @@ main {
 
 .small-movie-card__title {
   position: absolute;
-  z-index: 2;
+  z-index: 1;
   left: 0;
   right: 0;
   bottom: 0;

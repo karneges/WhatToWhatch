@@ -47,7 +47,6 @@ const MovieCard = ({ image, FilmName, id, video,genre }) => {
             <Link
               to={`/${id}`}
               className="small-movie-card__link"
-              href="movie-page.html"
             >
               {FilmName}   {genre}
             </Link>
