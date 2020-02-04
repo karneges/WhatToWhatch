@@ -38,6 +38,11 @@ const reducer = (state, action) => {
         ...state,
         myFilmList: newMyFilmList
       };
+      case "USER_LOGIN": 
+      return {
+        ...state,
+        user:action.payload
+      }
     default:
       return state;
   }

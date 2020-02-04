@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { timer } from "../../utils/utils";
 
-const MovieCard = ({ image, FilmName, id, video,genre }) => {
+const MovieCard = ({ image, FilmName, id, video, genre }) => {
   const [isVideo, setIsVideo] = useState(false);
   const [playVideo, setPlayVideo] = useState(false);
 
@@ -26,7 +26,7 @@ const MovieCard = ({ image, FilmName, id, video,genre }) => {
         autoPlay={true}
         controls={false}
       >
-        <source src={video}  type="video/mp4" />
+        <source src={video} type="video/mp4" />
       </video>
     );
   };
@@ -44,11 +44,8 @@ const MovieCard = ({ image, FilmName, id, video,genre }) => {
             <img src={image} alt={FilmName} width="280" height="175" />
           </div>
           <h3 className="small-movie-card__title">
-            <Link
-              to={`/${id}`}
-              className="small-movie-card__link"
-            >
-              {FilmName}   {genre}
+            <Link to={`/${id}`} className="small-movie-card__link">
+              {FilmName} {genre}
             </Link>
           </h3>
         </Fragment>

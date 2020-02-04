@@ -38,11 +38,18 @@ const fetchingBooks = (dispatch) => {
   .catch((error)=>dispatch(fetchFilmsFailure(error)))
 }
 
+const userLogin = (user) => {
+  return {
+    type:"USER_LOGIN",
+    payload:user
+  }
+}
+
 export {
   fetchingBooks,
   addFilmOnMyList,
-  deleteFilmOnMyList
+  deleteFilmOnMyList,
+  userLogin
 }
-
 
 

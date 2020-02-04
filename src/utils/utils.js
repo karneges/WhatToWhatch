@@ -1,12 +1,12 @@
-export   const timer = setIsVideo => {
+export const timer = setIsVideo => {
   const timerId = setTimeout(() => {
     setIsVideo(true);
-  }, 1000);
+  }, 2000);
   return timerId;
 };
 
 
-export const getCurrentFilm = (match,films) => {
+export const getCurrentFilm = (match, films) => {
   const getIdentificator = () => {
     return Object.values(match.params).filter(item => item > 0)[0];
   };
@@ -14,7 +14,7 @@ export const getCurrentFilm = (match,films) => {
 }
 
 
-export const getUrlFromChangeInfo = (currentFilm,match) => {
+export const getUrlFromChangeInfo = (currentFilm, match) => {
   if (!match.url.includes("film")) {
     return `/film/${currentFilm.id || 1}`;
   }

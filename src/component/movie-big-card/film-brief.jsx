@@ -1,8 +1,8 @@
 import React from "react";
 import ActionButton from "../buttons/action-button";
-import { useState } from "react";
 import { useEffect } from "react";
-
+import "./film-brief.scss";
+import useShowMoreClasses from "./hooks/use-show-more-classes";
 
 const FilmBrief = ({
   posterImage,
@@ -16,34 +16,27 @@ const FilmBrief = ({
   showVideoHandler
 }) => {
 
-
-
-  const [state, setState] = useState(false);
-  let _class = !state
-    ? "movie-card__poster"
-    : "movie-card__poster movie-card__poster_more";
-  let _class2 = !state
-    ? "movie-card__info"
-    : "movie-card__info movie-card__info_more";
+  const {
+    classCardPoster,
+    classMovieCardInfo,
+    classShowMoreArrow,
+    setShowMoreState
+  } = useShowMoreClasses();
 
   useEffect(() => {
     if (history.location.pathname.includes("/film")) {
-      setState(true);
+      setShowMoreState(true);
+    } else {
+      setShowMoreState(false);
     }
-    else{
-      setState(false)
-    }
-    
-  }, [history.location.pathname]);
-
-
+  }, [history.location.pathname, setShowMoreState]);
 
   return (
     <div className="movie-card__wrap">
-      <div className={_class}>
+      <div className={classCardPoster}>
         <img src={posterImage} alt={title} width="218" height="327" />
       </div>
-      <div className={_class2}>
+      <div className={classMovieCardInfo}>
         <div className="movie-card__desc">
           <h2 className="movie-card__title">{title}</h2>
           <p className="movie-card__meta">
@@ -53,7 +46,7 @@ const FilmBrief = ({
 
           <div className="movie-card__buttons">
             <ActionButton
-            clickHandler={showVideoHandler}
+              clickHandler={showVideoHandler}
               iconClass={"fa fa-lg fa-play-circle-o"}
               title={"Play"}
             />
@@ -62,9 +55,11 @@ const FilmBrief = ({
               title={"My list"}
               clickHandler={addFilmHandler}
             />
-            <ActionButton iconClass={iconClasses}
-            title={"Show More"}
-            clickHandler={showMoreHandler}/>
+            <ActionButton
+              iconClass={classShowMoreArrow}
+              title={"Show More"}
+              clickHandler={showMoreHandler}
+            />
           </div>
         </div>
       </div>

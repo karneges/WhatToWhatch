@@ -34,7 +34,7 @@ const MovieBigCard = ({
     "fa fa-lg fa-plus": !isAdd,
     "fa fa-lg fa-check": isAdd
   });
-  const addFilmHandler = () => {
+  const togleFilmOnMyListHandler = () => {
     if (!isAdd) {
       dispatch(addFilmOnMyList(currentFilm));
     }
@@ -64,7 +64,7 @@ const MovieBigCard = ({
         showVideoHandler={togleVideoHandler}
         showMoreHandler={showMoreHandler}
         history={history}
-        addFilmHandler={addFilmHandler}
+        addFilmHandler={togleFilmOnMyListHandler}
         posterImage={posterImage}
         genre={genre}
         year={year}

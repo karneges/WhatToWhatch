@@ -1,7 +1,9 @@
 import React from "react";
 import "./video-player.scss";
+import { useState } from "react";
 
 const VideoPlayer = ({ video, onCloseHandler }) => {
+
 
   const keyCloseVideo = e => {
     if (e.keyCode === 27) {
@@ -11,13 +13,16 @@ const VideoPlayer = ({ video, onCloseHandler }) => {
   return (
     <>
       <div onKeyDown={keyCloseVideo} className="overlay" tabIndex={1}>
-        <div className="modal">
-          <div className="modal__close" onClick={onCloseHandler}>
-            &times;
+        <div >
+          <div
+            className="modal">
+            <div className="modal__close" onClick={onCloseHandler}>
+              &times;
+            </div>
+            <video className="video_player" autoPlay={false} controls={true}>
+              <source src={video} type="video/mp4" />
+            </video>
           </div>
-          <video className="video_player" autoPlay={false} controls={true}>
-            <source src={video} type="video/mp4" />
-          </video>
         </div>
       </div>
     </>

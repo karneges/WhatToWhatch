@@ -4,24 +4,24 @@ import MainPage from "./pages/main-page/main-page";
 import SinglePageFilm from "./pages/single-film-page/single-film-page";
 import MyList from "./pages/my-list/my-list";
 import MainCatalog from "./component/main-catalog/main-catalog";
+import Authorization from "./pages/sign-in/authorization";
 
 const Routes = () => {
   return (
     <Switch>
-      {/* <Route path="/film/:id?"   component={SinglePageFilm}/> */}
-      <Route path="/mylist" exact  component={MyList}/>
+      <Route path='/authorization' component={Authorization}/>
+      <Route path="/mylist" exact component={MyList} />
 
-      <Route path="/:id?/:filmId?" >
+      <Route path="/:id?/:filmId?">
         <MainPage>
-          {({loading,films}) => {
+          {({ loading, films }) => {
             return (
               <Switch>
-
                 <Route path="/film/:filmId" exact>
-                <SinglePageFilm loading={loading} films={films} />
+                  <SinglePageFilm loading={loading} films={films} />
                 </Route>
                 <Route path="/:id?" exact>
-                <MainCatalog loading={loading} films={films} />
+                  <MainCatalog loading={loading} films={films} />
                 </Route>
               </Switch>
             );

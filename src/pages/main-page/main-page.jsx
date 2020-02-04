@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment } from "react";
 
 import Loading from "../../component/loading/loading";
 import MovieBigCard from "../../component/movie-big-card/movie-big-card";
@@ -9,11 +9,10 @@ import "./style.css";
 import Header from "../../component/header/header";
 import Footer from "../../component/footer/footer";
 import { useCurrentFilm } from "../../hooks/useCurrentFilm";
-import VideoPlayer from "../../component/video-player/video-player";
 
 const MainPage = ({ children }) => {
   const [globalState, dispatch] = useContext(FilmContext);
-  const { films, loading, error, myFilmList } = globalState;
+  const { films, loading,  myFilmList } = globalState;
   const currentFilm = useCurrentFilm();
 
   return (
