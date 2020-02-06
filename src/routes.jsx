@@ -9,7 +9,8 @@ import Authorization from "./pages/sign-in/authorization";
 const Routes = () => {
   return (
     <Switch>
-      <Route path='/authorization' component={Authorization}/>
+      <Route path="/signin" component={Authorization} />
+      <Route path="/signup" component={Authorization} />
       <Route path="/mylist" exact component={MyList} />
 
       <Route path="/:id?/:filmId?">

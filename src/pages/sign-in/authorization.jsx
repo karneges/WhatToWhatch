@@ -1,39 +1,59 @@
 import React from "react";
 import Footer from "../../component/footer/footer";
-import { getUserData } from "../../services/api-users";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useContext } from "react";
 import { FilmContext } from "../../contexts/film-context-service";
-import useCurrentUserCheker from "../../hooks/useCurrenUserCheker";
-import { Redirect } from "react-router-dom";
+import useUsersService from "../../hooks/useUsersService";
+import { Redirect, useRouteMatch, Link } from "react-router-dom";
 import useLocalStorage from "../../hooks/useLocalStorage";
+import "./authorization.scss";
 
 const Authorization = () => {
-  const [userToken] = useLocalStorage(`userToken`)
-  const [email, setEmail] = useState("");
+  const [, setUserToken] = useLocalStorage(`userToken`);
+  const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
-  const [globalData] = useContext(FilmContext);
+  const [email, setEmail] = useState("");
+  const [islogin, setIsLogin] = useState(false);
+  const [{ user, userError }] = useContext(FilmContext);
+  const match = useRouteMatch();
+  const { checkingUser, registerUser } = useUsersService();
+  const [isSignUp, setIsSignUp] = useState(false);
 
-  const { checkingUser } = useCurrentUserCheker();
-
-  const onSubmitHendler = e => {
-    e.preventDefault();
-    checkingUser(email, password);
-  };
+/// Добавить события ошибки ,добавить константы с сообщениями ,
+// добавить проверку на существование юзера,
+// Добавить редиректы после регистрации 
   useEffect(() => {
-    if (globalData.user) {
-      setEmail("");
-      setPassword("");
+    if (match.path === "/signup") {
+      setIsSignUp(true);
+    } else {
+      setIsSignUp(false);
     }
-  }, [globalData.user]);
+  }, [match.path]);
 
-  console.log(userToken);
-  
-  if(  userToken) {
-    return <Redirect to='/'/>
+  const onLoginHandler = e => {
+    e.preventDefault();
+    checkingUser(userName, password);
+  };
+
+  const onRegisterHandler = e => {
+    e.preventDefault();
+    registerUser(userName, password);
+  };
+
+  useEffect(() => {
+    if (user) {
+      setUserName("");
+      setPassword("");
+      setUserToken(user.userData.userName);
+      setIsLogin(true);
+    }
+  }, [setUserToken, user]);
+
+  if (islogin) {
+    return <Redirect to="/" />;
   }
-  
+
   return (
     <div className="user-page">
       <header className="page-header user-page__head">
@@ -44,26 +64,60 @@ const Authorization = () => {
             <span className="logo__letter logo__letter--3">W</span>
           </a>
         </div>
-
-        <h1 className="page-title user-page__title">Sign in</h1>
+        {isSignUp ? (
+          <h1 className="page-title user-page__title">Sign up</h1>
+        ) : (
+          <h1 className="page-title user-page__title">Sign in</h1>
+        )}
       </header>
 
       <div className="sign-in user-page__content">
-        <form onSubmit={onSubmitHendler} action="#" className="sign-in__form">
+        <form
+          onSubmit={isSignUp ? onRegisterHandler : onLoginHandler}
+          action="#"
+          className="sign-in__form"
+        >
           <div className="sign-in__fields">
             <div className="sign-in__field">
+              {isSignUp ? (
+                <Link to="/signin" className="register__link">
+                  Have an acount?
+                </Link>
+              ) : (
+                <Link to="/signup" className="register__link">
+                  Need an acaunt?
+                </Link>
+              )}
+              {userError && (
+                <div className="sign-in__message">
+                  <p>
+                    We can’t recognize this email and password combination.
+                    Please try again.
+                  </p>
+                </div>
+              )}
+              {isSignUp && (
+                <div className="sign-in__field">
+                  <input
+                    className="sign-in__input"
+                    type="Email"
+                    placeholder="E-mail"
+                    name="user-email"
+                    id="user-email"
+                    onChange={e => setEmail(e.target.value)}
+                    value={email}
+                  />
+                </div>
+              )}
+
               <input
                 className="sign-in__input"
-                placeholder="Email address"
+                placeholder="User name"
                 name="user-email"
                 id="user-email"
-                onChange={e => setEmail(e.target.value)}
-                value={email}
+                onChange={e => setUserName(e.target.value)}
+                value={userName}
               />
-              <label
-                className="sign-in__label visually-hidden"
-                for="user-email"
-              ></label>
             </div>
             <div className="sign-in__field">
               <input
@@ -75,15 +129,11 @@ const Authorization = () => {
                 onChange={e => setPassword(e.target.value)}
                 value={password}
               />
-              <label
-                className="sign-in__label visually-hidden"
-                for="user-password"
-              ></label>
             </div>
           </div>
           <div className="sign-in__submit">
             <button className="sign-in__btn" type="submit">
-              Sign in
+              {isSignUp ? `Sign up` : `Sign in`}
             </button>
           </div>
         </form>

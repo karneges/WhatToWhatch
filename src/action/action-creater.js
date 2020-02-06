@@ -45,11 +45,19 @@ const userLogin = (user) => {
   }
 }
 
+const userError = (error) => {
+  return {
+    type:"USER_ERROR",
+    payload:error
+  }
+}
+
 export {
   fetchingBooks,
   addFilmOnMyList,
   deleteFilmOnMyList,
-  userLogin
+  userLogin,
+  userError
 }
 
 
