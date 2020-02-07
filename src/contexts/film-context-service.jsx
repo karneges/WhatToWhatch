@@ -13,7 +13,7 @@ const initialState = {
   loading:true,
   error:false,
   films:[],
-  myFilmList:[]
+  myFilmList:[],
 }
 
 export const FilmContextProvider = ({children}) => {
@@ -22,6 +22,8 @@ export const FilmContextProvider = ({children}) => {
   useEffect(() => {
     fetchingBooks(dispatch);
   }, [dispatch]);
+
+
   return (
     <FilmContext.Provider value={store}>
       {children}

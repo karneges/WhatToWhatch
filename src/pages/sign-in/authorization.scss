@@ -7,3 +7,18 @@ text-align: center;
   padding-bottom: 15px;
   -webkit-transition: font-weight;
   transition: font-weight; }
+
+  .rotate-animation {
+    animation-name: rotate;
+
+    animation-duration: 1s;
+  }
+
+
+  
+  @keyframes rotate {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {transform: rotate(360deg);}
+  }

@@ -9,12 +9,16 @@ import "./style.css";
 import Header from "../../component/header/header";
 import Footer from "../../component/footer/footer";
 import { useCurrentFilm } from "../../hooks/useCurrentFilm";
+import useCheckUser from "../../hooks/useCheckUser";
 
 const MainPage = ({ children }) => {
-  const [globalState, dispatch] = useContext(FilmContext);
-  const { films, loading,  myFilmList } = globalState;
-  const currentFilm = useCurrentFilm();
 
+  const [globalState, dispatch] = useContext(FilmContext);
+  const { films, loading,  myFilmList,user } = globalState;
+  const currentFilm = useCurrentFilm();
+  useCheckUser()
+  console.log(user);
+  
   return (
     <Fragment>
       <section className="movie-card">

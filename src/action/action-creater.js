@@ -34,30 +34,36 @@ const deleteFilmOnMyList = (film) => {
 const fetchingBooks = (dispatch) => {
   dispatch(fetchFilmsRequest)
   getFilms()
-  .then((res)=>dispatch(fetchFilmsSuccess(res.data)))
-  .catch((error)=>dispatch(fetchFilmsFailure(error)))
+    .then((res) => dispatch(fetchFilmsSuccess(res.data)))
+    .catch((error) => dispatch(fetchFilmsFailure(error)))
 }
 
+const userLoading = () => {
+  return {
+    type: "FETCH_USER_REQUEST",
+  }
+}
 const userLogin = (user) => {
   return {
-    type:"USER_LOGIN",
-    payload:user
+    type: "FETCH_USER_SUCCESS",
+    payload: user
   }
 }
 
 const userError = (error) => {
   return {
-    type:"USER_ERROR",
-    payload:error
+    type: "FETCH_USER_ERROR",
+    payload: error
   }
 }
+
+
 
 export {
   fetchingBooks,
   addFilmOnMyList,
   deleteFilmOnMyList,
   userLogin,
-  userError
+  userError,
+  userLoading
 }
-
-

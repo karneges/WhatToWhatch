@@ -8,21 +8,21 @@ import useUsersService from "../../hooks/useUsersService";
 import { Redirect, useRouteMatch, Link } from "react-router-dom";
 import useLocalStorage from "../../hooks/useLocalStorage";
 import "./authorization.scss";
+import useCheckUser from "../../hooks/useCheckUser";
 
 const Authorization = () => {
-  const [, setUserToken] = useLocalStorage(`userToken`);
+  const [userToken, setUserToken] = useLocalStorage(`userToken`);
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [islogin, setIsLogin] = useState(false);
-  const [{ user, userError }] = useContext(FilmContext);
+  const [{ user, userError, userLoading }] = useContext(FilmContext);
   const match = useRouteMatch();
-  const { checkingUser, registerUser } = useUsersService();
+  const { checkingUser, registerUser} = useUsersService();
   const [isSignUp, setIsSignUp] = useState(false);
-
-/// Добавить события ошибки ,добавить константы с сообщениями ,
-// добавить проверку на существование юзера,
-// Добавить редиректы после регистрации 
+/// Реализовать загрузку списмка фильмов на сервер 
+// Реализовать загрузку коментариев на сервер 
+  useCheckUser();
   useEffect(() => {
     if (match.path === "/signup") {
       setIsSignUp(true);
@@ -30,6 +30,15 @@ const Authorization = () => {
       setIsSignUp(false);
     }
   }, [match.path]);
+
+  useEffect(() => {
+    if (user) {
+      setUserName("");
+      setPassword("");
+      setUserToken(user.userData.userName);
+      setIsLogin(true);
+    }
+  }, [setUserToken, user, userToken]);
 
   const onLoginHandler = e => {
     e.preventDefault();
@@ -41,14 +50,6 @@ const Authorization = () => {
     registerUser(userName, password);
   };
 
-  useEffect(() => {
-    if (user) {
-      setUserName("");
-      setPassword("");
-      setUserToken(user.userData.userName);
-      setIsLogin(true);
-    }
-  }, [setUserToken, user]);
 
   if (islogin) {
     return <Redirect to="/" />;
@@ -90,10 +91,7 @@ const Authorization = () => {
               )}
               {userError && (
                 <div className="sign-in__message">
-                  <p>
-                    We can’t recognize this email and password combination.
-                    Please try again.
-                  </p>
+                  <p>{userError}</p>
                 </div>
               )}
               {isSignUp && (
@@ -132,7 +130,12 @@ const Authorization = () => {
             </div>
           </div>
           <div className="sign-in__submit">
-            <button className="sign-in__btn" type="submit">
+            <button
+              className="sign-in__btn"
+              type="submit"
+              disabled={userLoading}
+            >
+              {userLoading && <i class="fa fa-repeat rotate-animation"></i>}
               {isSignUp ? `Sign up` : `Sign in`}
             </button>
           </div>

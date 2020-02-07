@@ -1,8 +1,6 @@
 const reducer = (state, action) => {
   switch (action.type) {
     case "FETCH_FILMS_REQUEST":
-      console.log(`загрузка в тру`);
-
       return {
         ...state,
         loading: true,
@@ -38,16 +36,24 @@ const reducer = (state, action) => {
         ...state,
         myFilmList: newMyFilmList
       };
-      case "USER_LOGIN": 
+      case "FETCH_USER_SUCCESS": 
       return {
         ...state,
-        userError:'',
-        user:action.payload
+        userError:null,
+        user:action.payload,
+        userLoading:false
       }
-      case "USER_ERROR": 
+      case "FETCH_USER_REQUEST": 
       return {
         ...state,
-        userError:action.payload
+        userError:null,
+        userLoading:true
+      }
+      case "FETCH_USER_ERROR": 
+      return {
+        ...state,
+        userError:action.payload,
+        userLoading:false
       }
     default:
       return state;

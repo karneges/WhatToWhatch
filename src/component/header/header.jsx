@@ -1,7 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { FilmContext } from "../../contexts/film-context-service";
 
 const Header = ({ headerTitle }) => {
+  const[{user}] = useContext(FilmContext)
+  
+  
   const headerClass = headerTitle
     ? "page-header user-page__head"
     : "page-header movie-card__head";
@@ -21,7 +26,8 @@ const Header = ({ headerTitle }) => {
 
       <Link to='/mylist' className="user-block">
         <div className="user-block__avatar">
-          <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
+          {user && user.userData.userName}
+         
         </div>
       </Link>
     </header>
