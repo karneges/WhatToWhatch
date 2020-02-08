@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "e32618676da26aca0635089c315cdf12",
+    "revision": "4b9bdfa5641e3263d7b1c1e24aa57063",
     "url": "/karneges.github.io/wtw/index.html"
   },
   {
-    "revision": "8b17a9f3309bd06ec573",
+    "revision": "3a5f09e7ef6d217dc874",
     "url": "/karneges.github.io/wtw/static/css/main.01be1241.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/karneges.github.io/wtw/static/js/2.8aaaa013.chunk.js.LICENSE"
   },
   {
-    "revision": "8b17a9f3309bd06ec573",
-    "url": "/karneges.github.io/wtw/static/js/main.c1f7516a.chunk.js"
+    "revision": "3a5f09e7ef6d217dc874",
+    "url": "/karneges.github.io/wtw/static/js/main.4e28b123.chunk.js"
   },
   {
     "revision": "ff871e0a373c800db48e",
