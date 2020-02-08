@@ -52,7 +52,7 @@ const useUsersService = () => {
   );
 
   const registerUser = async (name, password) => {
-    dispatch(userLoading())
+    dispatch(userLoading());
     const newUser = new RegistrationUser(name, password);
     const dataUsers = await getUserData().then(res => res);
 
@@ -66,16 +66,12 @@ const useUsersService = () => {
   };
 
   const addUserContent = async () => {
-
     allUserData[user.userData.userName] = {
       ...allUserData[user.userData.userName],
       ...user
     };
 
-
-    const newData = await setUserData({...allUserData});
-console.log(newData);
-
+    const newData = await setUserData({ ...allUserData });
     dispatch(allUsersData(newData));
   };
 

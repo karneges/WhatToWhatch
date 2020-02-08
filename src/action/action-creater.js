@@ -31,7 +31,7 @@ const deleteFilmOnMyList = (film) => {
   }
 }
 
-const fetchingBooks = (dispatch) => {
+const fetchingFilms = (dispatch) => {
   dispatch(fetchFilmsRequest)
   getFilms()
     .then((res) => dispatch(fetchFilmsSuccess(res.data)))
@@ -60,7 +60,7 @@ const userError = (error) => {
 const allUsersData = (dataUsers) => {
   return {
     type: 'FETCH_ALL_USER_SUCCESS',
-    payload:dataUsers
+    payload: dataUsers
   }
 }
 
@@ -73,7 +73,7 @@ const userLogaut = () => {
 
 
 export {
-  fetchingBooks,
+  fetchingFilms,
   addFilmOnMyList,
   deleteFilmOnMyList,
   userLogin,

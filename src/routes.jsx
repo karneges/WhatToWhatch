@@ -5,7 +5,13 @@ import SinglePageFilm from "./pages/single-film-page/single-film-page";
 import MyList from "./pages/my-list/my-list";
 import MainCatalog from "./component/main-catalog/main-catalog";
 import Authorization from "./pages/sign-in/authorization";
-import { signIn, signUp, myFilmListPage, mainPage,moreInfoPage } from "./constance/rote-constance";
+import {
+  signIn,
+  signUp,
+  myFilmListPage,
+  mainPage,
+  moreInfoPage
+} from "./constance/rote-constance";
 
 const Routes = () => {
   return (

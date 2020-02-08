@@ -3,7 +3,7 @@ import { createContext } from 'react';
 import { useReducer } from 'react';
 import reducer from '../reducers/reducer';
 import { useEffect } from 'react';
-import { fetchingBooks } from '../action/action-creater';
+import { fetchingFilms } from '../action/action-creater';
 
 
 
@@ -14,23 +14,14 @@ const initialState = {
   error:false,
   films:[],
   myFilmList:[],
-  // user:{
-  //   userData:{
-  //     userName:"",
-  //     password:""
-  //   },
-  //   userContent: {
-  //     myFilmList:[],
-  //     myComents:[]
-  //   }
-  // }
+
 }
 
 export const FilmContextProvider = ({children}) => {
   const store = useReducer(reducer,initialState)
   const[,dispatch] = store
   useEffect(() => {
-    fetchingBooks(dispatch);
+    fetchingFilms(dispatch);
   }, [dispatch]);
 
 

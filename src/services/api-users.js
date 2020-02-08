@@ -28,13 +28,3 @@ export const setUserData = async (newData) => {
 
 }
 
-// fetch("https://api.jsonbin.io/b/5e314a6d3d75894195e0fb14", {
-//     method: 'PUT',
-//     body: '{"b": "Hello World"}',
-//     versioning: false,
-//     headers: {
-//       'Content-Type': 'application/json',
-//     },
-//   })
-//   .then((res) => res.json())
-//   .then((res) => console.log(res))

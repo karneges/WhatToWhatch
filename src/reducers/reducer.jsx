@@ -21,30 +21,33 @@ const reducer = (state, action) => {
         myFilmList: []
       };
     case "ADD_FILM_ON_MY_LIST":
-
-      
       if (
-       Array.from(state.user.userContent.myFilmList).find(
-          item => item.id === action.payload.id)
+        Array.from(state.user.userContent.myFilmList).find(
+          item => item.id === action.payload.id
+        )
       ) {
         return { ...state };
       }
-      const {user} = state
-      const newUser = {userContent:{
-        myFilmList:[]
-      }}
-      newUser.userContent.myFilmList = [...Array.from(user.userContent.myFilmList),action.payload]
+      const { user } = state;
+      const newUser = {
+        userContent: {
+          myFilmList: []
+        }
+      };
+      newUser.userContent.myFilmList = [
+        ...Array.from(user.userContent.myFilmList),
+        action.payload
+      ];
       console.log(user.userContent === newUser.userContent);
-      
+
       return {
         ...state,
         user: {
-          ...user,...newUser
+          ...user,
+          ...newUser
         }
       };
     case "DELETE_FILM_ON_MY_LIST":
-      console.log(`deletFilm`);
-      
       const deleteFilmId = action.payload.id;
       const newMyFilmList = state.user.userContent.myFilmList.filter(
         ({ id }) => id !== deleteFilmId
@@ -54,7 +57,7 @@ const reducer = (state, action) => {
         user: {
           ...state.user,
           ...state.user.userContent,
-          ...state.user.userContent.myFilmList = newMyFilmList
+          ...(state.user.userContent.myFilmList = newMyFilmList)
         }
       };
     case "FETCH_USER_SUCCESS":
@@ -76,11 +79,11 @@ const reducer = (state, action) => {
         userError: action.payload,
         userLoading: false
       };
-      case "USER_LOAGAUT":
-        return {
-          ...state,
-          user:''
-        };
+    case "USER_LOAGAUT":
+      return {
+        ...state,
+        user: ""
+      };
     case "FETCH_ALL_USER_SUCCESS":
       return {
         ...state,

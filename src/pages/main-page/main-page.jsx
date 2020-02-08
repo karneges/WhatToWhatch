@@ -12,22 +12,18 @@ import { useCurrentFilm } from "../../hooks/useCurrentFilm";
 import useCheckUser from "../../hooks/useCheckUser";
 
 const MainPage = ({ children }) => {
-
   const [globalState, dispatch] = useContext(FilmContext);
-  const { films, loading,  user} = globalState;
+  const { films, loading, user } = globalState;
   const currentFilm = useCurrentFilm();
-  console.log(globalState);
-  const myFilmList  = user ? user.userContent.myFilmList :{}
-  useCheckUser()
-  console.log(user);
-  
-  
+  const myFilmList = user ? user.userContent.myFilmList : {};
+  useCheckUser();
+
   return (
     <Fragment>
       <section className="movie-card">
         <Header />
-        {loading  && <Loading />}
-        {!loading && films !== null  && (
+        {loading && <Loading />}
+        {!loading && films !== null && (
           <MovieBigCard
             myFilmList={myFilmList}
             currentFilm={currentFilm}
@@ -42,5 +38,6 @@ const MainPage = ({ children }) => {
     </Fragment>
   );
 };
+
 
 export default MainPage;

@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { withRouter } from "react-router-dom";
+import { withRouter, useHistory, useRouteMatch } from "react-router-dom";
 import classNames from "classnames";
 import FilmBrief from "./film-brief";
 import BackgroundImage from "../background-image/background-image";
@@ -11,13 +11,13 @@ import VideoPlayer from "../video-player/video-player";
 import { getUrlFromChangeInfo } from "../../utils/utils";
 import { useState } from "react";
 import useUsersService from "../../hooks/useUsersService";
-const MovieBigCard = ({
-  match,
-  history,
-  currentFilm,
-  dispatch,
-  myFilmList
-}) => {
+import { useCurrentFilm } from "../../hooks/useCurrentFilm";
+
+
+const MovieBigCard = ({ dispatch, myFilmList }) => {
+  const history = useHistory();
+  const match = useRouteMatch();
+  const currentFilm = useCurrentFilm()
   const { addUserContent } = useUsersService();
   const {
     id,
@@ -28,6 +28,7 @@ const MovieBigCard = ({
     background_image: backgroundimage,
     video_link: video
   } = currentFilm;
+  
   const [isVideo, setIsVideo] = useState(false);
 
   const isAdd = Array.from(myFilmList).find(item => item.id === id);

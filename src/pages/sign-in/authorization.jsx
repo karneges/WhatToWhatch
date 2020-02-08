@@ -35,7 +35,7 @@ const Authorization = () => {
   }, [match.path]);
 
   useEffect(() => {
-    if (user) {
+    if (user && user !== '') {
       setUserName("");
       setPassword("");
       setUserToken(user.userData.userName);

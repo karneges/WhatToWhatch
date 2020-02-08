@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useRouteMatch, useHistory} from "react-router-dom";
+import { Link, useRouteMatch} from "react-router-dom";
 import { useContext } from "react";
 import { FilmContext } from "../../contexts/film-context-service";
 import {
@@ -9,6 +9,7 @@ import {
 } from "../../constance/rote-constance";
 import useLocalStorage from "../../hooks/useLocalStorage";
 import { userLogaut } from "../../action/action-creater";
+import { useEffect } from "react";
 
 const Header = ({ headerTitle }) => {
   const [,setToken] = useLocalStorage(`userToken`)
@@ -20,9 +21,14 @@ const Header = ({ headerTitle }) => {
   }
 const onLogaut = () => {
   dispatch(userLogaut())
-  setToken(``)
-
 }
+
+useEffect(()=>{
+  if(user==='') {
+    setToken('')
+  }
+},[setToken, user])
+
 
   const headerClass = headerTitle
     ? "page-header user-page__head"
