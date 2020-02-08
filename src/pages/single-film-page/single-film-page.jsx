@@ -1,5 +1,4 @@
 import React, { Fragment } from "react";
-import Footer from "../../component/footer/footer";
 import "./single-film-page.css";
 import { useContext } from "react";
 import { FilmContext } from "../../contexts/film-context-service";
@@ -11,8 +10,8 @@ import MovieList from "../../component/movies-list/movies-list";
 import { useCurrentFilm } from "../../hooks/useCurrentFilm";
 
 const SinglePageFilm = () => {
-  const [globalState, dispatch] = useContext(FilmContext);
-  const { films, loading, error, myFilmList } = globalState;
+  const [globalState] = useContext(FilmContext);
+  const { films, loading} = globalState;
   const currentFilm = useCurrentFilm();
   const FilterButtons = [
     { Overview: ["overviewFilm"] },

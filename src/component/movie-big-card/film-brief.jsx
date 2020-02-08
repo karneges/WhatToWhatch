@@ -3,6 +3,8 @@ import ActionButton from "../buttons/action-button";
 import { useEffect } from "react";
 import "./film-brief.scss";
 import useShowMoreClasses from "./hooks/use-show-more-classes";
+import { useContext } from "react";
+import { FilmContext } from "../../contexts/film-context-service";
 
 const FilmBrief = ({
   posterImage,
@@ -13,8 +15,11 @@ const FilmBrief = ({
   addFilmHandler,
   history,
   showMoreHandler,
-  showVideoHandler
+  showVideoHandler,
 }) => {
+
+  const [{user}] = useContext(FilmContext);
+
 
   const {
     classCardPoster,
@@ -50,11 +55,14 @@ const FilmBrief = ({
               iconClass={"fa fa-lg fa-play-circle-o"}
               title={"Play"}
             />
-            <ActionButton
-              iconClass={iconClasses}
-              title={"My list"}
-              clickHandler={addFilmHandler}
-            />
+            {user && (
+              <ActionButton
+                iconClass={iconClasses}
+                title={"My list"}
+                clickHandler={addFilmHandler}
+              />
+            )}
+
             <ActionButton
               iconClass={classShowMoreArrow}
               title={"Show More"}

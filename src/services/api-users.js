@@ -1,26 +1,4 @@
-export const putUserData = (data) => {
-  fetch("https://api.jsonbin.io/b/5e39ba5ef47af813baceb350", {
-      method: 'PUT',
-      body: `  "users": {
-      "testUserName": {
-        "userData": {
-          "password": "test"
-        },
-        "userContent": {
-          "myFilmsList": "",
-          "myComents": ""
-        }
-      }
-    }`,
-      versioning: false,
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-    .then((res) => res.json())
-    .then((res) => console.log(res))
 
-}
 
 
 

@@ -14,6 +14,16 @@ const initialState = {
   error:false,
   films:[],
   myFilmList:[],
+  // user:{
+  //   userData:{
+  //     userName:"",
+  //     password:""
+  //   },
+  //   userContent: {
+  //     myFilmList:[],
+  //     myComents:[]
+  //   }
+  // }
 }
 
 export const FilmContextProvider = ({children}) => {

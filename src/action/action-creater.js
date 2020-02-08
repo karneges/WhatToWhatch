@@ -57,6 +57,19 @@ const userError = (error) => {
   }
 }
 
+const allUsersData = (dataUsers) => {
+  return {
+    type: 'FETCH_ALL_USER_SUCCESS',
+    payload:dataUsers
+  }
+}
+
+const userLogaut = () => {
+  return {
+    type: 'USER_LOAGAUT'
+  }
+}
+
 
 
 export {
@@ -65,5 +78,7 @@ export {
   deleteFilmOnMyList,
   userLogin,
   userError,
-  userLoading
+  userLoading,
+  allUsersData,
+  userLogaut
 }

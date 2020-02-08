@@ -8,7 +8,6 @@ export const useCurrentFilm = () => {
   const match = useRouteMatch()
 
   if(films[0]) {
-    console.log(films);
     return  getCurrentFilm(match,films)
   }
   return {}

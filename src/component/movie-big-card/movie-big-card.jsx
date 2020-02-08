@@ -10,6 +10,7 @@ import {
 import VideoPlayer from "../video-player/video-player";
 import { getUrlFromChangeInfo } from "../../utils/utils";
 import { useState } from "react";
+import useUsersService from "../../hooks/useUsersService";
 const MovieBigCard = ({
   match,
   history,
@@ -17,6 +18,7 @@ const MovieBigCard = ({
   dispatch,
   myFilmList
 }) => {
+  const { addUserContent } = useUsersService();
   const {
     id,
     name: title,
@@ -28,7 +30,7 @@ const MovieBigCard = ({
   } = currentFilm;
   const [isVideo, setIsVideo] = useState(false);
 
-  const isAdd = myFilmList.find(item => item.id === id);
+  const isAdd = Array.from(myFilmList).find(item => item.id === id);
 
   const iconClasses = classNames({
     "fa fa-lg fa-plus": !isAdd,
@@ -37,9 +39,11 @@ const MovieBigCard = ({
   const togleFilmOnMyListHandler = () => {
     if (!isAdd) {
       dispatch(addFilmOnMyList(currentFilm));
+      addUserContent();
     }
     if (isAdd) {
       dispatch(deleteFilmOnMyList(currentFilm));
+      addUserContent();
     }
   };
 

@@ -9,6 +9,7 @@ import { Redirect, useRouteMatch, Link } from "react-router-dom";
 import useLocalStorage from "../../hooks/useLocalStorage";
 import "./authorization.scss";
 import useCheckUser from "../../hooks/useCheckUser";
+import { signIn, signUp, mainPage } from "../../constance/rote-constance";
 
 const Authorization = () => {
   const [userToken, setUserToken] = useLocalStorage(`userToken`);
@@ -22,9 +23,11 @@ const Authorization = () => {
   const [isSignUp, setIsSignUp] = useState(false);
 /// Реализовать загрузку списмка фильмов на сервер 
 // Реализовать загрузку коментариев на сервер 
+
+// 
   useCheckUser();
   useEffect(() => {
-    if (match.path === "/signup") {
+    if (match.path === signUp) {
       setIsSignUp(true);
     } else {
       setIsSignUp(false);
@@ -52,18 +55,18 @@ const Authorization = () => {
 
 
   if (islogin) {
-    return <Redirect to="/" />;
+    return <Redirect to={mainPage} />;
   }
 
   return (
     <div className="user-page">
       <header className="page-header user-page__head">
         <div className="logo">
-          <a href="main.html" className="logo__link">
+          <Link to={mainPage} className="logo__link">
             <span className="logo__letter logo__letter--1">W</span>
             <span className="logo__letter logo__letter--2">T</span>
             <span className="logo__letter logo__letter--3">W</span>
-          </a>
+          </Link>
         </div>
         {isSignUp ? (
           <h1 className="page-title user-page__title">Sign up</h1>
@@ -81,11 +84,11 @@ const Authorization = () => {
           <div className="sign-in__fields">
             <div className="sign-in__field">
               {isSignUp ? (
-                <Link to="/signin" className="register__link">
+                <Link to={signIn} className="register__link">
                   Have an acount?
                 </Link>
               ) : (
-                <Link to="/signup" className="register__link">
+                <Link to={signUp} className="register__link">
                   Need an acaunt?
                 </Link>
               )}
@@ -135,7 +138,7 @@ const Authorization = () => {
               type="submit"
               disabled={userLoading}
             >
-              {userLoading && <i class="fa fa-repeat rotate-animation"></i>}
+              {userLoading && <i className="fa fa-repeat rotate-animation"></i>}
               {isSignUp ? `Sign up` : `Sign in`}
             </button>
           </div>

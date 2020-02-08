@@ -1,7 +1,12 @@
 import { getUserData, setUserData } from "../services/api-users";
 import { useContext } from "react";
 import { FilmContext } from "../contexts/film-context-service";
-import { userLoading, userError, userLogin } from "../action/action-creater";
+import {
+  userLoading,
+  userError,
+  userLogin,
+  allUsersData
+} from "../action/action-creater";
 import { RegistrationUser } from "../utils/utils";
 import {
   wrongEmailOrPassword,
@@ -10,13 +15,15 @@ import {
 import { useCallback } from "react";
 
 const useUsersService = () => {
-  const [, dispatch] = useContext(FilmContext);
+  const [{ allUserData, user }, dispatch] = useContext(FilmContext);
+
   const checkingUser = (name, password) => {
     dispatch(userLoading());
     let currentUser = "";
     getUserData().then(dataUsers => userCheker(dataUsers));
 
     const userCheker = dataUsers => {
+      dispatch(allUsersData(dataUsers));
       for (let i in dataUsers) {
         if (i === name && dataUsers[i].userData.password === password) {
           currentUser = dataUsers[i];
@@ -37,6 +44,7 @@ const useUsersService = () => {
         userUpdater(dataUsers);
       });
       const userUpdater = dataUsers => {
+        dispatch(allUsersData(dataUsers));
         dispatch(userLogin(dataUsers[userName]));
       };
     },
@@ -44,6 +52,7 @@ const useUsersService = () => {
   );
 
   const registerUser = async (name, password) => {
+    dispatch(userLoading())
     const newUser = new RegistrationUser(name, password);
     const dataUsers = await getUserData().then(res => res);
 
@@ -53,9 +62,24 @@ const useUsersService = () => {
     }
     const newData = await setUserData({ ...dataUsers, ...newUser });
     dispatch(userLogin(newData[name]));
+    dispatch(allUsersData(newData));
   };
 
-  return { checkingUser, registerUser, updateUser };
+  const addUserContent = async () => {
+
+    allUserData[user.userData.userName] = {
+      ...allUserData[user.userData.userName],
+      ...user
+    };
+
+
+    const newData = await setUserData({...allUserData});
+console.log(newData);
+
+    dispatch(allUsersData(newData));
+  };
+
+  return { checkingUser, registerUser, updateUser, addUserContent };
 };
 
 export default useUsersService;

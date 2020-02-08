@@ -24,7 +24,7 @@ export class RegistrationUser {
   constructor(name, password) {
     this[name] = {};
     this[name].userData = { userName: name, password: password };
-    this[name].userContent = { myFilmList: "", myComents: "" };
+    this[name].userContent = { myFilmList: [], myComents: [] };
   }
 }
 // export function registrationUser(name, password) {

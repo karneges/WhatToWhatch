@@ -1377,9 +1377,11 @@ main {
   color: inherit; }
 
 .user-block {
-  margin-left: auto; }
+  margin-left: auto; 
+  text-decoration: none;}
 
 .user-block__avatar {
+  
   padding-top: 30%;
   width: 63px;
   height: 63px;
@@ -1387,12 +1389,15 @@ main {
   border-radius: 50%;
   text-align: center;
   vertical-align: bottom;
-background-color: #4f4a77;
-color: #2f9e2b;
+  font-family: "Arial Black", sans-serif;
+  font-size: 32px;
+background-color: #565b5c;
+color: #eee5b5;
 }
 
 
 .user-block__link {
+  margin-left: 80%;
   display: block;
   font-size: 20px;
   line-height: 24px;

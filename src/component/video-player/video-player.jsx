@@ -1,6 +1,5 @@
 import React from "react";
 import "./video-player.scss";
-import { useState } from "react";
 
 const VideoPlayer = ({ video, onCloseHandler }) => {
 

@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import { useCurrentFilm } from "../../hooks/useCurrentFilm";
 import FilmOverview from "./film-overview";
 import FilmDetails from "./film-details";

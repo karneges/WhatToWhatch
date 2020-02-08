@@ -5,12 +5,12 @@ const useLocalStorage = (key,initialValue='') => {
     return localStorage.getItem(key) || initialValue
   });
 
+console.log(value);
+
 
 
   useEffect(() => {
-    localStorage.setItem(key,value)
-    console.log(value);
-    
+    localStorage.setItem(key,value)    
   },[value,key])
 
   return [value,setValue]

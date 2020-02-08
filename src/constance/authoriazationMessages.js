@@ -3,3 +3,4 @@ Please try again.`
 
 export const wrongUserName = `
 This user already exists`
+
