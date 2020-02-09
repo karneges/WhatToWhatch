@@ -5,6 +5,7 @@ import "./film-brief.scss";
 import useShowMoreClasses from "./hooks/use-show-more-classes";
 import { useContext } from "react";
 import { FilmContext } from "../../contexts/film-context-service";
+import useAlertMessage from "./hooks/use-alert-message";
 
 const FilmBrief = ({
   posterImage,
@@ -15,11 +16,8 @@ const FilmBrief = ({
   addFilmHandler,
   history,
   showMoreHandler,
-  showVideoHandler,
+  showVideoHandler
 }) => {
-
-  const [{user}] = useContext(FilmContext);
-
 
   const {
     classCardPoster,
@@ -27,6 +25,9 @@ const FilmBrief = ({
     classShowMoreArrow,
     setShowMoreState
   } = useShowMoreClasses();
+
+  const { onAlertHandler, LoginMessage } = useAlertMessage();
+  const [{ user }] = useContext(FilmContext);
 
   useEffect(() => {
     if (history.location.pathname.includes("/film")) {
@@ -55,13 +56,12 @@ const FilmBrief = ({
               iconClass={"fa fa-lg fa-play-circle-o"}
               title={"Play"}
             />
-            {user && (
-              <ActionButton
-                iconClass={iconClasses}
-                title={"My list"}
-                clickHandler={addFilmHandler}
-              />
-            )}
+            <LoginMessage />
+            <ActionButton
+              iconClass={iconClasses}
+              title={"My list"}
+              clickHandler={user ? addFilmHandler : onAlertHandler}
+            />
 
             <ActionButton
               iconClass={classShowMoreArrow}

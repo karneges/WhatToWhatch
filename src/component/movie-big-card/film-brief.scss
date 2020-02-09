@@ -4,3 +4,28 @@
 .active {
     transform: rotate(180deg);
   }
+
+  .alert-message {
+    width: 150px;
+    height: 40px;
+    position: absolute;
+    margin-left: 155px;
+    margin-top: -30px;
+    opacity: 0;
+    display: none;
+    animation-name: alertanimation;
+    animation-duration: 2s;
+    color: rgb(248, 124, 124);
+  }
+
+  @keyframes alertanimation {
+    0% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 50;
+    }
+    100%{
+      opacity: 0;
+    }
+  }
