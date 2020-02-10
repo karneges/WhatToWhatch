@@ -23,12 +23,12 @@ const MovieCardMoreInfo = ({ filterState }) => {
 
   return (
     <section
-      class="movie-card movie-card--full"
+      className="movie-card movie-card--full"
       style={{ backgroundColor: backgroundColor }}
     >
-      <div class="movie-card__wrap movie-card__translate-top">
-        <div class="movie-card__info">
-          <div class="movie-card__desc">{getTab()}</div>
+      <div className="movie-card__wrap movie-card__translate-top">
+        <div className="movie-card__info">
+          <div className="movie-card__desc">{getTab()}</div>
         </div>
       </div>
     </section>

@@ -7,9 +7,8 @@ import { timer } from "../../utils/utils";
 const MovieCard = ({ image, FilmName, id, video, genre }) => {
   const [isVideo, setIsVideo] = useState(false);
   const [playVideo, setPlayVideo] = useState(false);
-  const history = useHistory()
-  console.log(history);
-  
+  const history = useHistory();
+
   useEffect(() => {
     let timerId = "";
     if (isVideo) {
@@ -42,8 +41,10 @@ const MovieCard = ({ image, FilmName, id, video, genre }) => {
       {playVideo && <VideoState video={video} />}
       {!playVideo && (
         <Fragment>
-          <div className="small-movie-card__image"
-          onClick={()=>history.push(`/${id}`)}>
+          <div
+            className="small-movie-card__image"
+            onClick={() => history.push(`/${id}`)}
+          >
             <img src={image} alt={FilmName} width="280" height="175" />
           </div>
           <h3 className="small-movie-card__title">

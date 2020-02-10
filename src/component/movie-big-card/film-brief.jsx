@@ -23,12 +23,13 @@ const FilmBrief = ({
     classCardPoster,
     classMovieCardInfo,
     classShowMoreArrow,
-    setShowMoreState
+    setShowMoreState,
+    showMoreState
   } = useShowMoreClasses();
+console.log(showMoreState);
 
   const { onAlertHandler, LoginMessage } = useAlertMessage();
   const [{ user }] = useContext(FilmContext);
-
   useEffect(() => {
     if (history.location.pathname.includes("/film")) {
       setShowMoreState(true);
@@ -51,11 +52,11 @@ const FilmBrief = ({
           </p>
 
           <div className="movie-card__buttons">
-            <ActionButton
+            { !showMoreState && <ActionButton
               clickHandler={showVideoHandler}
               iconClass={"fa fa-lg fa-play-circle-o"}
               title={"Play"}
-            />
+            />}
             <LoginMessage />
             <ActionButton
               iconClass={iconClasses}
@@ -65,7 +66,7 @@ const FilmBrief = ({
 
             <ActionButton
               iconClass={classShowMoreArrow}
-              title={"Show More"}
+              title={!showMoreState? "Show More" :"Show Less"}
               clickHandler={showMoreHandler}
             />
           </div>

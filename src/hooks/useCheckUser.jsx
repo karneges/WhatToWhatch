@@ -8,7 +8,6 @@ const useCheckUser = () => {
   const [{user}] = useContext(FilmContext)
   const [userToken] = useLocalStorage(`userToken`)
   const {updateUser} = useUsersService()
-  console.log(`updateUser ${user}`);
   useEffect(() => {
     if (!user && user !== '' && userToken) {
 

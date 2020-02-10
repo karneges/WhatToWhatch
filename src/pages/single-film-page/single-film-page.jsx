@@ -23,7 +23,7 @@ const SinglePageFilm = () => {
 
   return (
     <Fragment>
-      <nav class="movie-nav movie-card__nav">
+      <nav className="movie-nav movie-card__nav">
         <FilterTabs
           filter={filterState}
           setFilter={setFilterState}
@@ -36,9 +36,9 @@ const SinglePageFilm = () => {
       {!loading && films && (
         <Fragment>
           <MovieCardMoreInfo filterState={filterState} />
-          <div class="page-content">
-            <section class="catalog catalog--like-this">
-              <h2 class="catalog__title">More like this</h2>
+          <div className="page-content">
+            <section className="catalog catalog--like-this">
+              <h2 className="catalog__title">More like this</h2>
               <MovieList
                 dataFilms={films}
                 filter={currentFilm.genre}

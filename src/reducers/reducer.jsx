@@ -38,7 +38,6 @@ const reducer = (state, action) => {
         ...Array.from(user.userContent.myFilmList),
         action.payload
       ];
-      console.log(user.userContent === newUser.userContent);
 
       return {
         ...state,

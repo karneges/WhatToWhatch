@@ -18,7 +18,7 @@ const VideoPlayer = ({ video, onCloseHandler }) => {
             <div className="modal__close" onClick={onCloseHandler}>
               &times;
             </div>
-            <video className="video_player" autoPlay={false} controls={true}>
+            <video className="video_player" autoPlay={true} controls={true}>
               <source src={video} type="video/mp4" />
             </video>
           </div>

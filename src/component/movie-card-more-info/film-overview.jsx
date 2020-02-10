@@ -11,20 +11,20 @@ const FilmOverview = () => {
   } = useCurrentFilm();
   return (
     <Fragment>
-      <div class="movie-rating">
-        <div class="movie-rating__score">{rating}</div>
-        <p class="movie-rating__meta">
-          <span class="movie-rating__count">{score} votes</span>
+      <div className="movie-rating">
+        <div className="movie-rating__score">{rating}</div>
+        <p className="movie-rating__meta">
+          <span className="movie-rating__count">{score} votes</span>
         </p>
       </div>
 
-      <div class="movie-card__text">
+      <div className="movie-card__text">
         <p>{description}</p>
-        <p class="movie-card__director">
+        <p className="movie-card__director">
           <strong>Director:{director}</strong>
         </p>
 
-        <p class="movie-card__starring">
+        <p className="movie-card__starring">
           <strong>{starring.join(" ,")}</strong>
         </p>
       </div>

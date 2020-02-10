@@ -22,7 +22,8 @@ const useShowMoreClasses = () => {
     classCardPoster,
     classMovieCardInfo,
     classShowMoreArrow,
-    setShowMoreState
+    setShowMoreState,
+    showMoreState
   };
 };
 
